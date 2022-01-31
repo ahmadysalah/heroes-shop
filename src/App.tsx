@@ -75,6 +75,8 @@ function App() {
     }
   }, [dispatch, notifications]);
 
+  console.log('hello from the colors team');
+  
   return (
     <div className="App">
       <ThemeProvider theme={themeMode}>
