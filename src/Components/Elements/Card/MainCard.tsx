@@ -30,6 +30,7 @@ export default function MainCard(props: Iprops) {
       navigate("/login");
     }
   };
+  const [imageSrc, setImageSrc] = useState(data.images[0]);
 
   return (
     <>
@@ -47,7 +48,8 @@ export default function MainCard(props: Iprops) {
           <img
             style={{ cursor: "pointer" }}
             onClick={() => navigate(`/product/${data._id}`)}
-            src={data.images[0]}
+            src={imageSrc}
+            onError={() => setImageSrc('Assets/default.png')}
             alt="phone"
             loading="lazy"
           />
