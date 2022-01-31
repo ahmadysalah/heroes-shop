@@ -55,6 +55,7 @@ const ShoppingCart = ({ data }: IpropsShopCart) => {
           <ItemImg alignItems="center" justifyContent="center">
             <img
               src={`${elemnt?.product?.images[0]}`}
+              
               alt=""
               width={"100%"}
               loading="lazy"

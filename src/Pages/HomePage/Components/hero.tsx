@@ -108,7 +108,7 @@ const Hero = () => {
                       {console.log("image", elemnt.images[0])}
                       <img
                         src={elemnt.images[0]}
-                        onError={(e) => { e.currentTarget.src = "Assets/default.png" }}
+                        onError={(e) => { e.currentTarget.src = "/Assets/default.png" }}
                         alt="" />
                     </SliderImage>
                   </Slider>
