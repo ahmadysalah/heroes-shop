@@ -74,7 +74,7 @@ function App() {
       dispatch(clearSuccessErrorNotification());
     }
   }, [dispatch, notifications]);
-
+  console.log("first");
   return (
     <div className="App">
       <ThemeProvider theme={themeMode}>
