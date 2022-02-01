@@ -26,10 +26,15 @@ interface IProps {
 const ProductDetails = ({ productById }: IProps) => {
   let navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const [color, setColor] = useState<string>("");
+  const [itemDetails, setItemDetails] = useState(
+    { productId: productById, qty: 1, color, max: productById.countInStock }
+  )
+
   let user = useSelector((state: RootState) => state?.entities.user);
-  const handleAddToCart = (id: string) => {
+  const handleAddToCart = () => {
     if (user.auth) {
-      dispatch(addItemToCart({ productId: id, qty: 1 }));
+      dispatch(addItemToCart(itemDetails as any));
     } else {
       navigate("/login");
     }
@@ -39,7 +44,6 @@ const ProductDetails = ({ productById }: IProps) => {
     return ele.product._id === productById._id;
   });
 
-  const [color, setColor] = useState("");
 
   return (
     <ProductDetail>
@@ -73,6 +77,8 @@ const ProductDetails = ({ productById }: IProps) => {
       <Counter
         counter={data && data?.length > 0 ? data[0].qty : 0}
         productId={productById._id}
+        color={color}
+        setCounterDetails={setItemDetails}
       />
       {productById?.colors?.length > 0 && (
         <Color>
@@ -116,7 +122,7 @@ const ProductDetails = ({ productById }: IProps) => {
             <Button
               fontSize={"14px"}
               padding={"1rem 3rem"}
-              onClick={() => handleAddToCart(productById._id)}
+              onClick={handleAddToCart}
             >
               Add TO Cart
             </Button>

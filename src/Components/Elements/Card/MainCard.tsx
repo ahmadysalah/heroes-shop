@@ -25,7 +25,7 @@ export default function MainCard(props: Iprops) {
   const navigate = useNavigate();
   const handleAddToCart = (id: string) => {
     if (user.auth) {
-      dispatch(addItemToCart({ productId: id, qty: 1 }));
+      dispatch(addItemToCart({ productId: id, qty: 1, color: data.colors[0] }));
     } else {
       navigate("/login");
     }

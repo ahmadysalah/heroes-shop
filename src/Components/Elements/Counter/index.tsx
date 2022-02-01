@@ -3,25 +3,42 @@ import { ContainerCounter, CounterDiv } from "./counter.style";
 import { useTheme } from "styled-components";
 import { useAppDispatch } from "../../../Store/configureStore";
 import { addItemToCart } from "../../../Store/Slices/user";
+import { useState } from "react";
 interface IPropsCounter {
   counter: number;
   productId?: string | undefined;
+  color: string;
+  setCounterDetails?: (obj: any) => void
 }
 
-const Counter: React.FC<IPropsCounter> = (props: IPropsCounter) => {
+const Counter: React.FC<IPropsCounter> = ({ setCounterDetails, ...props }: IPropsCounter) => {
+  const [counterState, setCounterState] = useState(1)
   const dispatch = useAppDispatch();
-  const { counter, productId } = props;
+  const { counter, productId, color } = props;
   const theme = useTheme();
   const increment = () => {
     if (productId) {
-      dispatch(addItemToCart({ productId, qty: counter + 1 }));
+      if (setCounterDetails) {
+        setCounterState(counterState + 1)
+        setCounterDetails({ productId, qty: counterState + 1, color })
+      }
+      else { dispatch(addItemToCart({ productId, qty: counter + 1, color })) }
     }
   };
 
   const decrement = () => {
-    if (productId && counter !== 1) {
-      dispatch(addItemToCart({ productId, qty: counter - 1 }));
+    if (productId) {
+      if (setCounterDetails) {
+        setCounterState(counterState - 1)
+        setCounterDetails({ productId, qty: counterState - 1, color })
+      }
+      else {
+        if (productId && counter !== 1) {
+          dispatch(addItemToCart({ productId, qty: counter - 1, color }));
+        }
+      }
     }
+
   };
 
   return (
@@ -43,7 +60,7 @@ const Counter: React.FC<IPropsCounter> = (props: IPropsCounter) => {
         -
       </Button>
 
-      <CounterDiv>{counter}</CounterDiv>
+      <CounterDiv>{setCounterDetails ? counterState : counter}</CounterDiv>
       <Button
         bold={true}
         borderHover={`1px solid ${theme.colors.primary}`}
