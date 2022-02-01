@@ -47,6 +47,7 @@ const ShoppingCart = ({ data }: IpropsShopCart) => {
           <ItemImg alignItems="center" justifyContent="center">
             <img
               src={`${element?.product?.images[0]}`}
+              onError={(e) => { e.currentTarget.src = "/Assets/default.png" }}
               alt=""
               width={"100%"}
               loading="lazy"
