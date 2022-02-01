@@ -21,7 +21,7 @@ const Counter: React.FC<IPropsCounter> = ({ setCounterDetails, max, ...props }: 
     if (productId) {
       if (setCounterDetails) {
         setCounterState(counterState + 1)
-        setCounterDetails({ productId, qty: counterState + 1, color })
+        setCounterDetails({ productId, qty: counterState, color })
       }
       else { dispatch(addItemToCart({ productId, qty: counter + 1, color })) }
     }
@@ -31,7 +31,7 @@ const Counter: React.FC<IPropsCounter> = ({ setCounterDetails, max, ...props }: 
     if (productId) {
       if (setCounterDetails) {
         setCounterState(counterState - 1)
-        setCounterDetails({ productId, qty: counterState - 1, color })
+        setCounterDetails({ productId, qty: counterState, color })
       }
       else {
         if (productId && counter !== 1) {
@@ -61,7 +61,7 @@ const Counter: React.FC<IPropsCounter> = ({ setCounterDetails, max, ...props }: 
         -
       </Button>
 
-      <CounterDiv>{setCounterDetails ? counterState : counter}</CounterDiv>
+      <CounterDiv>{setCounterDetails ? counterState - 1 : counter}</CounterDiv>
       <Button
         bold={true}
         borderHover={`1px solid ${theme.colors.primary}`}
@@ -74,7 +74,7 @@ const Counter: React.FC<IPropsCounter> = ({ setCounterDetails, max, ...props }: 
         colorHover={theme.common.black}
         color={theme.textColors.counterColor}
         onClick={increment}
-        disabled =  {max === counterState}
+        disabled={max === counterState}
       >
         +
       </Button>
