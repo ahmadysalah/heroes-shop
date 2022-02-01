@@ -158,7 +158,7 @@ export const updateUserProfile = (data: IUserProfile) =>
   });
 
 //user Cart functions
-export const addItemToCart = (data: { productId: string; qty: number }) =>
+export const addItemToCart = (data: { productId: string; qty: number, color: string }) =>
   apiCallBegan({
     url: "users/profile/cart",
     method: "put",

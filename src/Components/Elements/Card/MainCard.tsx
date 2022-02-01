@@ -25,11 +25,12 @@ export default function MainCard(props: Iprops) {
   const navigate = useNavigate();
   const handleAddToCart = (id: string) => {
     if (user.auth) {
-      dispatch(addItemToCart({ productId: id, qty: 1 }));
+      dispatch(addItemToCart({ productId: id, qty: 1, color: data.colors[0] }));
     } else {
       navigate("/login");
     }
   };
+  const [imageSrc, setImageSrc] = useState(data.images[0]);
 
   return (
     <>
@@ -47,7 +48,8 @@ export default function MainCard(props: Iprops) {
           <img
             style={{ cursor: "pointer" }}
             onClick={() => navigate(`/product/${data._id}`)}
-            src={data.images[0]}
+            src={imageSrc}
+            onError={() => setImageSrc('Assets/default.png')}
             alt="phone"
             loading="lazy"
           />

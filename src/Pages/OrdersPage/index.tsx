@@ -89,7 +89,7 @@ const OrdersPage = () => {
                           <ProductDetails key={"orderItem" + item._id}>
                             <div style={{ width: "10px" }}>{index + 1}</div>
                             <ProductImage>
-                              <img src={item?.product?.images[0]} alt="" />
+                              <img src={item?.product?.images[0]} alt="" onError={(e) => { e.currentTarget.src = "Assets/default.png" }} />
                             </ProductImage>
                             <ProductContent>
                               <Typography variant="body1">

@@ -4,7 +4,7 @@ import { ContentOrder } from "./ContentOrder";
 import { ItemImg } from "../../Components/Elements/Card/style";
 import { RootState } from "../../Store/configureStore";
 import { useSelector } from "react-redux";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 
 export interface Iprop {
   title: string;
@@ -51,11 +51,12 @@ const OrderDetails = () => {
 export default OrderDetails;
 export const ContentCart = (props: Iprop) => {
   const { title, imgUrl, price, qty } = props;
+  const [errorHandleImage, setErrorHandleImage] = useState<boolean>(false);
   return (
     <>
       <ContentOrderDetails>
         <ItemImg alignItems="center">
-          <img src={imgUrl} alt="pictured" width={"100%"} loading="lazy" />
+          <img src={errorHandleImage ? "/Assets/default.png" : imgUrl} alt="pictured" width={"100%"} loading="lazy" onError={() => setErrorHandleImage(true)} />
         </ItemImg>
         <div style={{ width: "25%" }}>
           <Typography
