@@ -79,6 +79,7 @@ const ProductDetails = ({ productById }: IProps) => {
         productId={productById._id}
         color={color}
         setCounterDetails={setItemDetails}
+        max={productById.countInStock}
       />
       {productById?.colors?.length > 0 && (
         <Color>

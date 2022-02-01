@@ -8,10 +8,11 @@ interface IPropsCounter {
   counter: number;
   productId?: string | undefined;
   color: string;
-  setCounterDetails?: (obj: any) => void
+  setCounterDetails?: (obj: any) => void;
+  max: number;
 }
 
-const Counter: React.FC<IPropsCounter> = ({ setCounterDetails, ...props }: IPropsCounter) => {
+const Counter: React.FC<IPropsCounter> = ({ setCounterDetails, max, ...props }: IPropsCounter) => {
   const [counterState, setCounterState] = useState(1)
   const dispatch = useAppDispatch();
   const { counter, productId, color } = props;
@@ -73,6 +74,7 @@ const Counter: React.FC<IPropsCounter> = ({ setCounterDetails, ...props }: IProp
         colorHover={theme.common.black}
         color={theme.textColors.counterColor}
         onClick={increment}
+        disabled =  {max === counterState}
       >
         +
       </Button>

@@ -75,6 +75,7 @@ const ShoppingCart = ({ data }: IpropsShopCart) => {
                 counter={elemnt.qty}
                 productId={elemnt.product._id && elemnt.product._id}
                 color=""
+                max={elemnt.product.countInStock}
               />
             </ItemCounter>
             <Itemprice>
