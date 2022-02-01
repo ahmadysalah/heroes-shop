@@ -74,8 +74,7 @@ function App() {
       dispatch(clearSuccessErrorNotification());
     }
   }, [dispatch, notifications]);
-
-  console.log('hello from the colors team');
+  
   
   return (
     <div className="App">
