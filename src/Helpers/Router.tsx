@@ -20,7 +20,7 @@ const CartPage = lazy(() => import("../Pages/CartPage"));
 const ShippingPage = lazy(
   () => import("../Pages/ReviewPage/shippingReviewPage")
 );
-const PlaceOrderPage = lazy(() => import("../Pages/ReviewPage/placeOrder"));
+const PlaceOrderPage = lazy(() => import("../Pages/ReviewPage"));
 const PaymentPage = lazy(() => import("../Pages/PaymentPage"));
 const OrdersPage = lazy(() => import("../Pages/OrdersPage"));
 

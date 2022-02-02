@@ -34,7 +34,9 @@ const Index = () => {
     (state: RootState) => state?.entities?.user?.data?.cart?.items
   );
   let orders = useSelector((state: RootState) => state.entities.order);
-  let shippingAddress = useSelector((state: RootState) => state.entities.order.order?.shippingAddress)
+  let shippingAddress = useSelector(
+    (state: RootState) => state.entities.order.order?.shippingAddress
+  );
 
   return (
     <SuccessMessage>
@@ -48,8 +50,8 @@ const Index = () => {
         <Title>Payment Success !</Title>
         <InfoContainer>
           <h2>Order number</h2>
-          {orders?.order?.orderItems?.map((item) => (
-            <p key={item.product._id}>{item.product}</p>
+          {orders?.order?.orderItems?.map((item, i) => (
+            <p key={i}>{item.product}</p>
           ))}
         </InfoContainer>
         <InfoContainer>

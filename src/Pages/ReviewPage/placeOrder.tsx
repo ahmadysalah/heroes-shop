@@ -21,15 +21,8 @@ import { useLocation } from "react-router-dom";
 import { RootState } from "../../Store/configureStore";
 import { useSelector } from "react-redux";
 
-// import { createOrder } from "../../Store/Slices/orders";
-// import { useAppDispatch } from "../../Store/configureStore";
-
 // Stripe Hooks
-import {
-  useStripe,
-  useElements,
-  // CardNumberElement,
-} from "@stripe/react-stripe-js";
+import { useStripe, useElements } from "@stripe/react-stripe-js";
 
 // Stripe Checkout Form
 import PaymentForm from "../../Components/Stripe/checkoutForm/paymentForm";
@@ -37,7 +30,6 @@ import PaymentForm from "../../Components/Stripe/checkoutForm/paymentForm";
 const PlaceOrder = () => {
   let navigate = useNavigate();
   const query = new URLSearchParams(useLocation().search);
-  // let order = useSelector((state: RootState) => state.entities.order.order);
   let { data } = useSelector((state: RootState) => state?.entities.user);
   const items = useSelector(
     (state: RootState) => state?.entities?.user?.data?.cart?.items
@@ -55,12 +47,6 @@ const PlaceOrder = () => {
 
   const handleClick = async () => {
     if (!stripe || !elements) return;
-
-    // const payload = await stripe.confirmCardPayment(order?.clientSecret!, {
-    //   payment_method: {
-    //     card: elements.getElement(CardNumberElement)!,
-    //   },
-    // });
 
     navigate(
       `/product/payment/${id}?city=${city}&country=${country}&zipCode=${code}&streetAddress=${street}`
