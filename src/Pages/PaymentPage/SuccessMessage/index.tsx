@@ -1,29 +1,8 @@
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router";
-import styled from "styled-components";
 import AlertMessage from "../../../Components/Elements/Alert/index";
 import { RootState } from "../../../Store/configureStore";
-
-const SuccessMessage = styled.div`
-  padding: 40px 0;
-`;
-
-const Hint = styled.p`
-  width: 30%;
-  font-weight: bold;
-  font-size: 13px;
-  color: #3a3939;
-`;
-const Title = styled.h1`
-  margin-bottom: 25px;
-`;
-const InfoContainer = styled.div`
-  display: flex;
-  margin: 18px 0;
-  h2 {
-    width: 30%;
-  }
-`;
+import { Hint, InfoContainer, SuccessMessage, Title } from "./style";
 
 const Index = () => {
   const query = new URLSearchParams(useLocation().search);
@@ -33,6 +12,8 @@ const Index = () => {
   const items = useSelector(
     (state: RootState) => state?.entities?.user?.data?.cart?.items
   );
+  console.log(items, "hiiiiiiiiiiiii");
+
   let orders = useSelector((state: RootState) => state.entities.order);
   let shippingAddress = useSelector(
     (state: RootState) => state.entities.order.order?.shippingAddress
@@ -48,6 +29,7 @@ const Index = () => {
         }}
       >
         <Title>Payment Success !</Title>
+
         <InfoContainer>
           <h2>Order number</h2>
           {orders?.order?.orderItems?.map((item, i) => (
@@ -63,8 +45,8 @@ const Index = () => {
         <InfoContainer>
           <h2>Order Items</h2>
           <div>
-            {items?.map((item) => (
-              <p key={item.product._id}>{item.product.name}</p>
+            {items?.map((item, i) => (
+              <p key={i}>{item.product.name}</p>
             ))}
           </div>
         </InfoContainer>

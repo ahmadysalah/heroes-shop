@@ -44,10 +44,8 @@ const PlaceOrder = () => {
   //stripe
   const stripe = useStripe();
   const elements = useElements();
-
   const handleClick = async () => {
     if (!stripe || !elements) return;
-
     navigate(
       `/product/payment/${id}?city=${city}&country=${country}&zipCode=${code}&streetAddress=${street}`
     );
