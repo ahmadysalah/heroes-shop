@@ -11,7 +11,6 @@ import {
   ContainerOrderDetails,
   PositionButton,
 } from "./style";
-import Button from "../../Components/Elements/Buttons";
 import Typography from "../../Components/Typography";
 import { ContentCart } from "./OrderDetails";
 import ContentOrder from "./ContentOrder";
@@ -22,34 +21,47 @@ import { RootState } from "../../Store/configureStore";
 import { useSelector } from "react-redux";
 
 // Stripe Hooks
-import { useStripe, useElements } from "@stripe/react-stripe-js";
 
 // Stripe Checkout Form
 import PaymentForm from "../../Components/Stripe/checkoutForm/paymentForm";
+import Button from "../../Components/Elements/Buttons";
+import { CardNumberElement, useElements, useStripe } from "@stripe/react-stripe-js";
 
 const PlaceOrder = () => {
   let navigate = useNavigate();
   const query = new URLSearchParams(useLocation().search);
   let { data } = useSelector((state: RootState) => state?.entities.user);
+  const { order } = useSelector((state: RootState) => state?.entities.order);
   const items = useSelector(
     (state: RootState) => state?.entities?.user?.data?.cart?.items
   );
-
   const city = query.get("city");
   const country = query.get("country");
   const street = query.get("streetAddress");
   const code = query.get("zipCode");
   const { id } = useParams();
 
-  //stripe
-  const stripe = useStripe();
-  const elements = useElements();
-  const handleClick = async () => {
-    if (!stripe || !elements) return;
-    navigate(
-      `/product/payment/${id}?city=${city}&country=${country}&zipCode=${code}&streetAddress=${street}`
+  const stripe: any = useStripe();
+  const elements: any = useElements();
+
+  const handleSubmit = async () => {
+    console.log(order?.clientSecret, elements.getElement(CardNumberElement))
+    const { error, paymentIntent } = await stripe.confirmCardPayment(
+      order?.clientSecret,
+      {
+        payment_method: {
+          card: elements.getElement(CardNumberElement),
+        },
+      }
     );
+    console.log('paymentIntent', paymentIntent)
+    if (!error) {
+      navigate(
+        `/product/payment/${id}?city=${city}&country=${country}&zipCode=${code}&streetAddress=${street}`
+      );
+    };
   };
+
 
   return (
     <Container>
@@ -131,7 +143,7 @@ const PlaceOrder = () => {
               />
             </Fragment>
           ))}
-          <PaymentForm />
+          <PaymentForm id={id} city={city} country={country} code={code} street={street} order={order} />
         </ContentPlaceOrder>
         <ContainerOrderDetails>
           <ContentDetailsPlaceOrder>
@@ -153,7 +165,7 @@ const PlaceOrder = () => {
               fontSize={"12px"}
               form={"form"}
               margin="3px 0px 0px 70px"
-              onClick={handleClick}
+              onClick={handleSubmit}
             >
               place order
             </Button>

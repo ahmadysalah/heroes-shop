@@ -9,7 +9,7 @@ import {
   CardNumberElement,
 } from "@stripe/react-stripe-js";
 
-const PaymentForm = () => {
+const PaymentForm: React.FC<any> = ({ id, city, country, code, street, order }) => {
   const [name, setName] = useState<string>("");
 
   return (
@@ -54,6 +54,18 @@ const PaymentForm = () => {
             </StripeElement>
           </div>
         </InputContainer>
+        {/* <PositionButton>
+          <Button
+            type="submit"
+            backgroundColor={"#FCDD06"}
+            padding={"1rem 3rem"}
+            fontSize={"12px"}
+            form={"form"}
+            margin="3px 0px 0px 70px"
+          >
+            place order
+          </Button>
+        </PositionButton> */}
       </form>
     </React.Fragment>
   );
