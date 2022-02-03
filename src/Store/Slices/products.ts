@@ -8,6 +8,7 @@ import {
   IproductsByPaginate,
   IAllCategories,
 } from "../Types";
+import { string } from "yup/lib/locale";
 
 const initialState: () => IProductsSliceState = () => ({
   productsByPaginate: {
@@ -78,6 +79,7 @@ const slice = createSlice({
       state.productById = product;
     },
 
+
     productsRequested: (state, action) => {
       state.loading = true;
     },
@@ -139,6 +141,14 @@ export const getProductsById = (data: { id: string }) =>
     onSuccess: productByIdReceived.type,
   });
 
+export const getProductReviews = (data: { id: string }) =>
+  apiCallBegan({
+    url: `products/${data.id}/reviews`,
+    method: "get",
+    onStart: productsRequested.type,
+    onSuccess: productByIdReceived.type,
+  });
+
 export const addReviewToProducts = (
   productID: string,
   data: { rating: number; comment: string }
@@ -148,7 +158,7 @@ export const addReviewToProducts = (
     method: "post",
     data: data,
     headers: getAuthHeader(),
-    onSuccess: productByIdReceived.type,
+    onSucces: getProductsById({ id: productID }),
     msgOnSuccess: "review Added Successfuly",
   });
 

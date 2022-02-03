@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import AddReview from "../../../Components/AddReview";
 import Button from "../../../Components/Elements/Buttons";
@@ -20,12 +20,22 @@ interface IProps {
 }
 const Reviews = ({ productById, isAuth }: IProps) => {
   const navigate = useNavigate();
+  const [reviews, setReviews] = useState(productById.reviews);
   const [uploadImagedModalDisplay, setUploadImagedModalDisplay] =
     useState<boolean>(false);
 
   const handleOpenReviewDialog = () => {
     setUploadImagedModalDisplay(true);
+
   };
+  // useEffect(() => {
+  //   first;
+
+  //   return () => {
+  //     second;
+  //   };
+  // }, [third]);
+
   return (
     <>
       <Title>
@@ -37,8 +47,8 @@ const Reviews = ({ productById, isAuth }: IProps) => {
 
       <Technical>
         <Review>
-          {productById?.reviews?.length !== 0 ? (
-            productById?.reviews?.map((row) => (
+          {reviews?.length !== 0 ? (
+            reviews?.map((row) => (
               <Padding key={row._id}>
                 <Typography
                   style={{
@@ -51,7 +61,7 @@ const Reviews = ({ productById, isAuth }: IProps) => {
                   {row.name}
                 </Typography>
                 <Pragraphdate>
-                  <Rate rating={row.rating} onRating={() => {}} />
+                  <Rate rating={row.rating} onRating={() => { }} />
                   <Typography style={{ fontSize: "12px" }}>
                     {" "}
                     {row.createdAt?.slice(0, 10)}

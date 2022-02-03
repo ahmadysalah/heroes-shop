@@ -15,13 +15,13 @@ const SubTotal = ({ data }: Iprops) => {
 
   const Discount = () => {
     return (
-      data.totalPrice -
       data?.items?.reduce(
-        (acc: number, { product }: any) => (product.discount as number) + acc,
+        (acc: number, { product }: any) => (product.price as number) + acc,
         0
       )
-    );
+    ).toFixed(2);
   };
+
   const totalPrice = () => {
     return Math.round(data.totalPrice) - 0.01;
   };
@@ -33,14 +33,13 @@ const SubTotal = ({ data }: Iprops) => {
           variant="h5"
           style={{ textDecoration: "line-through", color: "#707070" }}
         >
-          ${totalPrice()}
+          ${Discount()}
         </Typography>
         <Typography
           variant="h5"
           fontWeight={700}
-          children={`${
-            Discount() < 0 ? 0 : Math.round(Number(Discount())) - 0.01
-          }`}
+          children={`${totalPrice() < 0 ? 0 : Math.round(Number(totalPrice())) - 0.01
+            }`}
         />
       </div>
       <Hr width="100%" />

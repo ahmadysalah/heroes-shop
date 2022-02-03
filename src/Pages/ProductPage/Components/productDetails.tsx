@@ -54,24 +54,29 @@ const ProductDetails = ({ productById }: IProps) => {
         </Typography>
         <div>
           {productById.discount ? (
-            <Discount>
-              <Typography style={{ fontSize: "15px" }}>
-                <del>
-                  {" "}
-                  ${(productById.price - productById.discount).toFixed(2)}
-                </del>
+            <>
+              <Discount>
+                <Typography style={{ fontSize: "15px" }}>
+                  <del>
+                    {" "}
+                    ${(productById.price).toFixed(2)}
+                  </del>
+                </Typography>
+                <Typography style={{ color: "red", fontSize: "15px" }}>
+                  {Math.round((100 * productById.discount) / productById.price)}%
+                  Sale
+                </Typography>
+              </Discount>
+              <Typography variant="h6" style={{ fontWeight: "bold" }}>
+                ${productById.price - productById.discount}
               </Typography>
-              <Typography style={{ color: "red", fontSize: "15px" }}>
-                {Math.round((100 * productById.discount) / productById.price)}%
-                Sale
-              </Typography>
-            </Discount>
+            </>
           ) : (
-            ""
+            <Typography variant="h6" style={{ fontWeight: "bold" }}>
+              ${productById.price}
+            </Typography>
           )}
-          <Typography variant="h6" style={{ fontWeight: "bold" }}>
-            ${productById.price}
-          </Typography>
+
         </div>
       </Title>
       <Counter
