@@ -7,8 +7,8 @@ import Typography from "../../Typography";
 
 import { InputContainer } from "./style";
 
-const FormShipping = (props?: FormikProps<shippingValues>) => {
-  const { errors?, touched? } = props;
+const FormShipping = (props: FormikProps<shippingValues>) => {
+  const { errors, touched } = props;
 
   return (
     <Continer id="form">
