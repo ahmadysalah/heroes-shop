@@ -1,11 +1,12 @@
 import { Formik } from "formik";
 import { IAddReview } from "../../../@Types/Validation";
 import { AddReviewSchema } from "../../../Helpers/Validation/AddReviewSchema";
-import { addReviewToProducts } from "../../../Store/Slices/products";
+import { addReviewToProducts, getProductsById } from "../../../Store/Slices/products";
 import AddReviewForm from "./AddReviewForm";
 import { useAppDispatch } from "../../../Store/configureStore";
 
 import { Review } from "../../../Store/Types/index";
+import { useNavigate, useParams } from "react-router-dom";
 const Index = ({
   setModalDisplay,
   rate,
@@ -21,6 +22,8 @@ const Index = ({
     rate: 0,
   };
 
+  const { id } = useParams();
+  const navigate = useNavigate();
   return (
     <Formik
       initialValues={initialValues}
@@ -30,7 +33,10 @@ const Index = ({
           comment: values.description,
         };
         dispatch(addReviewToProducts(productId, review));
+        // navigate(`/product/${id}`)
         setModalDisplay(false);
+        // id && dispatch(getProductsById({ id }));
+        window.location.reload();
       }}
       validationSchema={AddReviewSchema}
       children={(formikProps) => (
