@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -11,7 +11,6 @@ import SwiperCore, {
   Autoplay,
 } from "swiper";
 import {
-  Image,
   Slider,
   SliderDatiles,
   SliderDatilesm,
@@ -41,7 +40,6 @@ const Hero = () => {
   const handelClick = (id: string) => {
     navigate(`/product/${id}`);
   };
-  const [srcImage, setSrcImage] = useState("Assets/default.png");
   return (
     <>
       {loading ? (
@@ -59,7 +57,6 @@ const Hero = () => {
             autoplay={{ delay: 3000, disableOnInteraction: false }}
           >
             {productsByTopThree.map((elemnt, index) => (
-
               <SwiperSlide key={elemnt.name + index}>
                 <Container>
                   <Slider>
@@ -108,8 +105,11 @@ const Hero = () => {
                       {console.log("image", elemnt.images[0])}
                       <img
                         src={elemnt.images[0]}
-                        onError={(e) => { e.currentTarget.src = "/Assets/default.png" }}
-                        alt="" />
+                        onError={(e) => {
+                          e.currentTarget.src = "/Assets/default.png";
+                        }}
+                        alt=""
+                      />
                     </SliderImage>
                   </Slider>
                 </Container>

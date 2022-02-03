@@ -7,27 +7,10 @@ import {
   CardCvcElement,
   CardExpiryElement,
   CardNumberElement,
-  useElements,
-  useStripe,
 } from "@stripe/react-stripe-js";
 
 const PaymentForm = () => {
   const [name, setName] = useState<string>("");
-  const stripe: any = useStripe();
-  const elements: any = useElements();
-
-  const handleSubmit = async (event: any) => {
-    event.preventDefault();
-    const { error, paymentIntent } = await stripe.confirmCardPayment(
-      // client secret
-      // res.clientSecret,
-      {
-        payment_method: {
-          card: elements.getElement(CardNumberElement),
-        },
-      }
-    );
-  };
 
   return (
     <React.Fragment>

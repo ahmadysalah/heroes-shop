@@ -6,10 +6,3 @@ const ModalContent = ({ children }: { children: React.ReactNode }) => {
 };
 
 export default ModalContent;
-
-// <Dialog />
-// <DialogActions />
-// <DialogContent />
-// <DialogContentText />
-// <DialogTitle />
-// <Slide />

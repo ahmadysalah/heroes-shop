@@ -18,8 +18,11 @@ const ImageSection = ({ productById }: IProps) => {
         <>
           <Imagefirst>
             <img
-              src={imageError ? "/Assets/default.png" : BigImage || productById?.images[0]}
-              // src={BigImage || productById?.images[0]}
+              src={
+                imageError
+                  ? "/Assets/default.png"
+                  : BigImage || productById?.images[0]
+              }
               loading="lazy"
               alt=""
             />
@@ -30,7 +33,14 @@ const ImageSection = ({ productById }: IProps) => {
                 key={element + index}
                 onClick={() => setBigImage(element)}
               >
-                <img src={element} loading="lazy" alt="" onError={(e) => { e.currentTarget.src = "/Assets/default.png" }} />
+                <img
+                  src={element}
+                  loading="lazy"
+                  alt=""
+                  onError={(e) => {
+                    e.currentTarget.src = "/Assets/default.png";
+                  }}
+                />
               </ImageSmall>
             ))}
           </ImageSecionSecond>
