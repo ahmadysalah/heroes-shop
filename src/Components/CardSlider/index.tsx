@@ -5,10 +5,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css/pagination";
 import SwiperCore, { Pagination } from "swiper";
 import { Container } from "./style";
-import { RootState, useAppDispatch } from "../../Store/configureStore";
+import { RootState } from "../../Store/configureStore";
 import { useSelector } from "react-redux";
-import { FC, useEffect } from "react";
-import { getAllProductsByPaginate } from "../../Store/Slices/products";
 import SppinerLoading from "../Elements/SppinerLoading";
 
 // install Swiper modules

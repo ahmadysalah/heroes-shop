@@ -1,6 +1,12 @@
 import Container from "../../Components/Container";
 import Typography from "../../Components/Typography";
-import { ContainerShoppingCartEmpty, LinkBack, Parent, TitleLink, Wrapper } from "./style";
+import {
+  ContainerShoppingCartEmpty,
+  LinkBack,
+  Parent,
+  TitleLink,
+  Wrapper,
+} from "./style";
 import SubTotal from "./SubTotal";
 import { RootState } from "../../Store/configureStore";
 import { useSelector } from "react-redux";
@@ -29,10 +35,13 @@ const CartPage = () => {
                 <ShoppingCart data={data?.cart} />
               </Wrapper>
             ) : (
-                <ContainerShoppingCartEmpty>
-                  <Typography variant="h3" fontWeight={700}> Your shopping cart is Empty!  </Typography>
+              <ContainerShoppingCartEmpty>
+                <Typography variant="h3" fontWeight={700}>
+                  {" "}
+                  Your shopping cart is Empty!{" "}
+                </Typography>
                 <img src="Assets/Group 491.png" alt="" />
-                </ContainerShoppingCartEmpty>
+              </ContainerShoppingCartEmpty>
             )}
           </>
         ) : (

@@ -37,5 +37,4 @@ function App() {
 
 export default App;
 
-//  <Elements stripe={stripePromise}>
-//   let [stripePromise, setStripePromise] = useState<any>(null);
+

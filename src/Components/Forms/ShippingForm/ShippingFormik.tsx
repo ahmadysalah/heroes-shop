@@ -6,6 +6,7 @@ import { useAppDispatch } from "../../../Store/configureStore";
 import { createOrder } from "../../../Store/Slices/orders";
 import { IShippingAddress } from "../../../Store/Types";
 import { useParams } from "react-router";
+import { CardElement } from "@stripe/react-stripe-js";
 
 const ShippingFormik = () => {
   let navigate = useNavigate();
@@ -18,25 +19,34 @@ const ShippingFormik = () => {
     streetAddress: "",
   };
   return (
-    <Formik
-      initialValues={initialValues}
-      onSubmit={(values: IShippingAddress, actions) => {
-        actions.setSubmitting(false);
-        dispatch(
-          createOrder({
-            address: values.streetAddress,
-            postalCode: values.zipCode,
-            city: values.city,
-            country: values.country,
-          })
-        );
-        navigate(
-          `/product/review/placeorder/${id}?city=${values.city}&country=${values.country}&zipCode=${values.zipCode}&streetAddress=${values.streetAddress}`
-        );
-      }}
-      validationSchema={ShippingSchema}
-      children={FormShipping}
-    />
+    <>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={(values: IShippingAddress, actions) => {
+          actions.setSubmitting(false);
+          dispatch(
+            createOrder({
+              address: values.streetAddress,
+              postalCode: values.zipCode,
+              city: values.city,
+              country: values.country,
+            })
+          );
+          navigate(
+            `/product/review/placeorder/${id}?city=${values.city}&country=${values.country}&zipCode=${values.zipCode}&streetAddress=${values.streetAddress}`
+          );
+        }}
+        validationSchema={ShippingSchema}
+      >
+        <>
+          <FormShipping errors={""}, touched={""} />
+          <CardElement
+            options={cardElementOpts as any}
+            onChange={handleCardDetailsChange}
+          />
+        </>
+      </Formik>
+    </>
   );
 };
 
