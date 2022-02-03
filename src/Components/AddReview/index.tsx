@@ -2,7 +2,6 @@ import Modal from "../Elements/Modal/Dialog/Modal";
 import ModalContent from "../Elements/Modal/Dialog/ModalContent/ModalContent";
 import ModalTitle from "../Elements/Modal/Dialog/ModalTitle/ModalTitle";
 import AddReviewForm from "../Forms/AddReviewForm";
-// import ChangePasswordForm from "../Forms/ChangePassword/index";
 
 interface IProps {
   modalDisplay: boolean;

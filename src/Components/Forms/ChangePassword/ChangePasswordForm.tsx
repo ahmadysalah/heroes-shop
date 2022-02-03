@@ -16,15 +16,6 @@ const ChangePasswordForm = ({ errors, touched, setModalDisplay }: IProps) => {
 
   return (
     <Form>
-      {/* <FlexInput>
-        <Label>Enter your current password </Label>
-        <FormInput
-          name="password"
-          errors={errors}
-          touched={touched}
-          type={"password"}
-        />
-      </FlexInput> */}
       <FlexInput>
         <Label>Enter your new password</Label>
         <FormInput
