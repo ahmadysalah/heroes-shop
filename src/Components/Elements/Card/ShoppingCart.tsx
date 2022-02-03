@@ -47,6 +47,7 @@ const ShoppingCart = ({ data }: IpropsShopCart) => {
           <ItemImg alignItems="center" justifyContent="center">
             <img
               src={`${element?.product?.images[0]}`}
+              onError={(e) => { e.currentTarget.src = "/Assets/default.png" }}
               alt=""
               width={"100%"}
               loading="lazy"
@@ -63,6 +64,8 @@ const ShoppingCart = ({ data }: IpropsShopCart) => {
             </ItemTypo>
             <ItemCounter>
               <Counter
+                color=""
+                max={element.product.countInStock}
                 counter={element.qty}
                 productId={element.product._id && element.product._id}
               />

@@ -11,13 +11,15 @@ interface IProps {
 }
 const ImageSection = ({ productById }: IProps) => {
   const [BigImage, setBigImage] = useState("");
+  const [imageError, setImageError] = useState<boolean>(false);
   return (
     <ImageSections>
       {productById?.images !== undefined && productById?.images?.length > 0 ? (
         <>
           <Imagefirst>
             <img
-              src={BigImage || productById?.images[0]}
+              src={imageError ? "/Assets/default.png" : BigImage || productById?.images[0]}
+              // src={BigImage || productById?.images[0]}
               loading="lazy"
               alt=""
             />
@@ -28,7 +30,7 @@ const ImageSection = ({ productById }: IProps) => {
                 key={element + index}
                 onClick={() => setBigImage(element)}
               >
-                <img src={element} loading="lazy" alt="" />
+                <img src={element} loading="lazy" alt="" onError={(e) => { e.currentTarget.src = "/Assets/default.png" }} />
               </ImageSmall>
             ))}
           </ImageSecionSecond>
