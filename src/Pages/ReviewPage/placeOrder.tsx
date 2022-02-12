@@ -54,7 +54,6 @@ const PlaceOrder = () => {
         },
       }
     );
-    console.log('paymentIntent', paymentIntent)
     if (!error) {
       navigate(
         `/product/payment/${id}?city=${city}&country=${country}&zipCode=${code}&streetAddress=${street}`
